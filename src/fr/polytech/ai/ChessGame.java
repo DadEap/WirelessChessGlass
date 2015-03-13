@@ -1,5 +1,4 @@
 package fr.polytech.ai;
-
 import chesspresso.Chess;
 import chesspresso.move.IllegalMoveException;
 import chesspresso.move.Move;

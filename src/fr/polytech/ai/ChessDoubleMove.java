@@ -1,5 +1,4 @@
 package fr.polytech.ai;
-
 public class ChessDoubleMove {
 	
 	public short actualMove;
