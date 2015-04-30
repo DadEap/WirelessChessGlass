@@ -52,8 +52,6 @@ public sealed class Chessboard : MonoBehaviour
 				positions.Add(name, GameObject.Find(name));
 			} 
 		}
-		Move ("A7", "A5");
-		Move ("A5", "A7");
 		//InitBtPlugin ();
 	}
 
@@ -76,9 +74,6 @@ public sealed class Chessboard : MonoBehaviour
 		//Debug.Log ("plugin bt init");*/
 	}
 #endif
-	public int compteur;
-	string[] from = {"D7", "B8", "C7", "C8", "E7", "D8"};
-	string[] to = {"D5", "A6", "C6", "F5", "E5", "H4"};
 	// Update is called once per frame
 	void Update () {
 		foreach (var piece in pieces) {
@@ -86,13 +81,6 @@ public sealed class Chessboard : MonoBehaviour
 				piece.obj.transform.Translate((piece.newPosition-piece.obj.transform.position) * Time.deltaTime, Space.World);
 				if (piece.obj.transform.position == piece.newPosition) {
 					piece.inMovement = false;
-					if (compteur < 6) {
-						Move(from[compteur], to[compteur]);
-						compteur++;
-					} else if (compteur == 6) {
-						BigCastling();
-						compteur++;
-					}
 				}
 			}
 		}
@@ -137,7 +125,7 @@ public sealed class Chessboard : MonoBehaviour
 		return true;
 	}
 	
-	
+	// Petit Roque
 	public Boolean LittleCastling ()
 	{
 		// récupérer le roi
@@ -168,7 +156,7 @@ public sealed class Chessboard : MonoBehaviour
 		return true;
 	}
 
-
+	// Grand Roque
 	public Boolean BigCastling ()
 	{
 		// récupérer le roi
@@ -199,13 +187,13 @@ public sealed class Chessboard : MonoBehaviour
 		return true;
 	}
 	
-	
+	// Réinitialiser la position des pièces noires
 	public void Reset () {
 		ResetOne ("rook1",   "A8");
 		ResetOne ("knight1", "B8");
 		ResetOne ("bishop1", "C8");
-		ResetOne ("queen",  "D8");
-		ResetOne ("king",   "E8");
+		ResetOne ("queen",   "D8");
+		ResetOne ("king",    "E8");
 		ResetOne ("bishop2", "F8");
 		ResetOne ("knight2", "G8");
 		ResetOne ("rook2",   "H8");
@@ -219,7 +207,8 @@ public sealed class Chessboard : MonoBehaviour
 		ResetOne ("pawn8",   "H7");
 	}
 	
-	
+	// Réinitialiser la position de la pièce passée en
+	// paramètre à la position passée en paramètre.
 	public void ResetOne (string name, string pos) {
 		Piece pc = pieces.Find (x => x.name == name);
 		pc.obj.SetActive (true);
